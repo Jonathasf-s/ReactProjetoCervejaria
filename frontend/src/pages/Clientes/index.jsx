@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import LinhaCliente from '../../components/LinhaCliente';
+import { useClientes } from '../../hooks/useClientes';
 import './Clientes.css';
 
 export default function Clientes() {
-  const [clientes, setClientes] = useState([]);
+  // Puxando toda a inteligência do seu Hook
+  const {
+    clientes,
+    clienteEmEdicao,
+    salvarCliente,
+    deletarCliente,
+    carregarClienteParaEdicao,
+    cancelarEdicao
+  } = useClientes();
+
+  // Estado local para controlar a digitação no formulário
   const [formData, setFormData] = useState({
     id: '',
     nome: '',
@@ -13,17 +24,27 @@ export default function Clientes() {
     endereco: '',
     dataNascimento: ''
   });
-  const [editando, setEditando] = useState(false);
 
-  // Carregar clientes do localStorage ao montar
+  // Sempre que o hook avisar que há um cliente em edição, o formulário é preenchido
   useEffect(() => {
-    const clientesSalvos = localStorage.getItem('mars_clientes');
-    if (clientesSalvos) {
-      setClientes(JSON.parse(clientesSalvos));
+    if (clienteEmEdicao) {
+      setFormData(clienteEmEdicao);
+    } else {
+      // Limpa os inputs se cancelar a edição ou após salvar com sucesso
+      setFormData({
+        id: '',
+        nome: '',
+        email: '',
+        telefone: '',
+        cpf: '',
+        endereco: '',
+        dataNascimento: ''
+      });
     }
-  }, []);
+  }, [clienteEmEdicao]);
 
-  // Validar campos obrigatórios
+  const editando = !!clienteEmEdicao;
+
   const validarFormulario = () => {
     if (!formData.nome.trim() || !formData.email.trim() || !formData.telefone.trim() || !formData.cpf.trim() || !formData.endereco.trim() || !formData.dataNascimento) {
       alert('Por favor, preencha todos os campos obrigatórios');
@@ -32,27 +53,11 @@ export default function Clientes() {
     return true;
   };
 
-  // Validar CPF (formato básico)
   const validarCPF = (cpf) => {
     const cpfLimpo = cpf.replace(/\D/g, '');
     return cpfLimpo.length === 11;
   };
 
-  // Resetar formulário
-  const resetarFormulario = () => {
-    setFormData({
-      id: '',
-      nome: '',
-      email: '',
-      telefone: '',
-      cpf: '',
-      endereco: '',
-      dataNascimento: ''
-    });
-    setEditando(false);
-  };
-
-  // Atualizar campo do formulário
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -61,17 +66,10 @@ export default function Clientes() {
     });
   };
 
-  // Callback para editar cliente
-  const handleEditar = (cliente) => {
-    setFormData(cliente);
-    setEditando(true);
-  };
-
   return (
     <div className="container-clientes">
       <h1>📋 Cadastro de Clientes</h1>
 
-      {/* Formulário */}
       <section className="formulario-section">
         <h2>{editando ? 'Editar Cliente' : 'Novo Cliente'}</h2>
         <form onSubmit={(e) => {
@@ -83,14 +81,8 @@ export default function Clientes() {
             return;
           }
 
-          if (editando) {
-            // Membro 5 vai implementar a lógica de edição e persistência
-            console.log('Membro 5: Implementar atualização do cliente', formData);
-          } else {
-            // Membro 5 vai implementar a lógica de criação e persistência
-            console.log('Membro 5: Implementar criação do cliente', formData);
-          }
-          resetarFormulario();
+          // Chama a função do seu Hook para salvar!
+          salvarCliente(formData);
         }}>
           <div className="form-row">
             <div className="form-group">
@@ -173,7 +165,8 @@ export default function Clientes() {
               {editando ? '✏️ Atualizar' : '➕ Adicionar'}
             </button>
             {editando && (
-              <button type="button" className="btn-cancelar" onClick={resetarFormulario}>
+              // Chama a função de cancelar edição do seu Hook
+              <button type="button" className="btn-cancelar" onClick={cancelarEdicao}>
                 ❌ Cancelar
               </button>
             )}
@@ -181,7 +174,6 @@ export default function Clientes() {
         </form>
       </section>
 
-      {/* Lista de Clientes */}
       <section className="listagem-section">
         <h2>Lista de Clientes</h2>
         {clientes.length === 0 ? (
@@ -202,11 +194,9 @@ export default function Clientes() {
                 <LinhaCliente
                   key={cliente.id}
                   cliente={cliente}
-                  onEditar={handleEditar}
-                  onDeletar={(id) => {
-                    // Membro 5 vai implementar a lógica de deleção
-                    console.log('Membro 5: Implementar deleção do cliente', id);
-                  }}
+                  // Conectando os botões da tabela nas suas funções
+                  onEditar={(c) => carregarClienteParaEdicao(c.id)}
+                  onDeletar={(id) => deletarCliente(id)}
                 />
               ))}
             </tbody>
