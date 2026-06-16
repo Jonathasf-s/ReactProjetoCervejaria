@@ -3,6 +3,7 @@ import { AuthProvider, AuthContext } from './context/AuthContext';
 import Login from './pages/Login/Login';
 import Formulario from './pages/Formulario/Formulario';
 import Relatorio from './pages/Relatorio/Relatorio'; // Importando seu relatório com JOIN
+import Clientes from './pages/Clientes'; // Importar página de Clientes
 
 function ConteudoDoSistema() {
   const { logado, sair } = useContext(AuthContext);
@@ -47,6 +48,22 @@ function ConteudoDoSistema() {
           >
             📝 Formulário (CRUD)
           </button>
+
+          <button 
+            onClick={() => setTelaAtiva('clientes')} 
+            style={{ 
+              padding: '8px 16px', 
+              background: telaAtiva === 'clientes' ? '#ff9900' : '#333', 
+              color: telaAtiva === 'clientes' ? '#000' : '#fff', 
+              border: 'none',
+              borderRadius: '4px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}
+          >
+            👥 Clientes
+          </button>
           
           <button 
             onClick={() => setTelaAtiva('relatorio')} 
@@ -87,6 +104,12 @@ function ConteudoDoSistema() {
         {telaAtiva === 'formulario' && (
           <div style={{ background: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
             <Formulario />
+          </div>
+        )}
+
+        {telaAtiva === 'clientes' && (
+          <div style={{ background: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
+            <Clientes />
           </div>
         )}
         
