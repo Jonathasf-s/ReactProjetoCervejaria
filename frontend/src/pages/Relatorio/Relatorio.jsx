@@ -67,7 +67,7 @@ function Relatorio() {
   return (
     <div style={{ padding: '20px' }}>
       <h2>📊 Relatório de Vendas — Mars Cervejaria</h2>
-      <p>Este relatório realiza um <strong>JOIN</strong> cruzando as tabelas de Pedidos, Clientes e Cervejas.</p>
+      <p></p>
 
       {relatorioDados.length === 0 ? (
         <p>Nenhum pedido realizado até o momento.</p>
