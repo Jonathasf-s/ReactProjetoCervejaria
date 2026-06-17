@@ -49,7 +49,7 @@ function ConteudoDoSistema() {
               transition: 'all 0.2s'
             }}
           >
-            📝 Formulário (CRUD)
+            🍻 Cervejas
           </button>
 
           <button 
