@@ -4,6 +4,7 @@ import Login from './pages/Login/Login';
 import Formulario from './pages/Formulario/Formulario';
 import Relatorio from './pages/Relatorio/Relatorio'; // Importando seu relatório com JOIN
 import Clientes from './pages/Clientes'; // Importar página de Clientes
+import Pedidos from './pages/Pedidos'; // Importar página de Pedidos
 
 function ConteudoDoSistema() {
   const { logado, sair } = useContext(AuthContext);
@@ -27,12 +28,14 @@ function ConteudoDoSistema() {
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+        flexWrap: 'wrap',
+        gap: '15px'
       }}>
         <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>🍻 Mars Cervejaria - Admin</span>
         
         {/* Menu de Botões para alternar entre as telas */}
-        <nav style={{ display: 'flex', gap: '15px' }}>
+        <nav style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
           <button 
             onClick={() => setTelaAtiva('formulario')} 
             style={{ 
@@ -64,6 +67,22 @@ function ConteudoDoSistema() {
           >
             👥 Clientes
           </button>
+
+          <button 
+            onClick={() => setTelaAtiva('pedidos')} 
+            style={{ 
+              padding: '8px 16px', 
+              background: telaAtiva === 'pedidos' ? '#ff9900' : '#333', 
+              color: telaAtiva === 'pedidos' ? '#000' : '#fff', 
+              border: 'none',
+              borderRadius: '4px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}
+          >
+            🛒 Pedidos
+          </button>
           
           <button 
             onClick={() => setTelaAtiva('relatorio')} 
@@ -92,7 +111,8 @@ function ConteudoDoSistema() {
             padding: '8px 16px', 
             borderRadius: '4px',
             cursor: 'pointer',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            transition: 'all 0.2s'
           }}
         >
           Sair (Logout)
@@ -110,6 +130,12 @@ function ConteudoDoSistema() {
         {telaAtiva === 'clientes' && (
           <div style={{ background: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
             <Clientes />
+          </div>
+        )}
+
+        {telaAtiva === 'pedidos' && (
+          <div style={{ background: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
+            <Pedidos />
           </div>
         )}
         
