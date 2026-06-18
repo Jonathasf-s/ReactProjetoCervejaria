@@ -39,7 +39,7 @@ function Formulario() {
       alert("Cerveja editada com sucesso!");
       setIdEdicao(null); // Desativa o modo edição após terminar
     } else {
-      // MODO CADASTRO: Cria uma nova cerveja (Lógica que sua dupla começou)
+      // MODO CADASTRO: Cria uma nova cerveja
       const novaCerveja = {
         id: Date.now().toString(), // Gera um ID único baseado no tempo
         nome: nome,
