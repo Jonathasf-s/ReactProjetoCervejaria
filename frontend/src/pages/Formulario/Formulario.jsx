@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Formulario.css';
 
 function Formulario() {
   // --- ESTADOS ---
@@ -75,100 +76,99 @@ function Formulario() {
     setPreco(cerveja.preco); // Coloca o preço de volta na caixa de texto
   };
 
+  const editando = !!idEdicao;
+
   return (
-    <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
-      <h2>Cadastro Mars Cervejaria</h2>
-      
-      {/* Formulário */}
-      <form onSubmit={handleCadastrar}>
-        <div>
-          <label>Nome do Produto (Cerveja):</label>
-          <input 
-            type="text" 
-            placeholder="Ex: IPA Especial" 
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-            required 
-            style={{ marginLeft: '10px', padding: '5px' }}
-          />
-        </div>
-        
-        <br />
-        
-        <div>
-          <label>Preço (R$):</label>
-          <input 
-            type="number" 
-            placeholder="0.00" 
-            step="0.01" 
-            min="0.01"  
-            value={preco}
-            onChange={(e) => setPreco(e.target.value)}
-            required 
-            style={{ marginLeft: '10px', padding: '5px' }}
-          />
-        </div>
-        
-        <br />
-        
-        {/* Muda a cor e o texto do botão para o usuário saber se está editando ou cadastrando */}
-        <button 
-          type="submit" 
-          style={{ padding: '8px 15px', cursor: 'pointer', backgroundColor: idEdicao ? '#ffc107' : '#007bff', color: idEdicao ? '#000' : '#fff', border: 'none', borderRadius: '4px' }}
-        >
-          {idEdicao ? 'Salvar Alterações' : 'Cadastrar'}
-        </button>
+    <div className="container-formulario">
+      <h1>🍻 Cadastro de Cervejas</h1>
 
-        {idEdicao && (
-          <button 
-            type="button" 
-            onClick={() => { setIdEdicao(null); setNome(''); setPreco(''); }} 
-            style={{ marginLeft: '10px', padding: '8px 15px', cursor: 'pointer' }}
-          >
-            Cancelar Edição
-          </button>
+      <section className="formulario-section">
+        <h2>{editando ? '✏️ Editar Cerveja' : '➕ Nova Cerveja'}</h2>
+        
+        <form onSubmit={handleCadastrar}>
+          <div className="form-row">
+            <div className="form-group">
+              <label>Nome do Produto *</label>
+              <input 
+                type="text" 
+                placeholder="Ex: IPA Especial" 
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Preço (R$) *</label>
+              <input 
+                type="number" 
+                placeholder="0.00" 
+                step="0.01" 
+                min="0.01"  
+                value={preco}
+                onChange={(e) => setPreco(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="button-group">
+            <button type="submit" className="btn-salvar">
+              {editando ? '✏️ Atualizar' : '➕ Cadastrar'}
+            </button>
+            {editando && (
+              <button 
+                type="button" 
+                className="btn-cancelar"
+                onClick={() => { setIdEdicao(null); setNome(''); setPreco(''); }}
+              >
+                ❌ Cancelar
+              </button>
+            )}
+          </div>
+        </form>
+      </section>
+
+      <section className="listagem-section">
+        <h2>Lista de Cervejas</h2>
+        {cervejas.length === 0 ? (
+          <p className="sem-dados">Nenhuma cerveja cadastrada ainda.</p>
+        ) : (
+          <div className="table-wrapper">
+            <table className="tabela-cervejas">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Preço</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cervejas.map((cerveja) => (
+                  <tr key={cerveja.id}>
+                    <td>{cerveja.nome}</td>
+                    <td>R$ {cerveja.preco}</td>
+                    <td>
+                      <button 
+                        className="btn-editar"
+                        onClick={() => handleIniciarEdicao(cerveja)}
+                      >
+                        ✏️ Editar
+                      </button>
+                      <button 
+                        className="btn-deletar"
+                        onClick={() => handleExcluir(cerveja.id)}
+                      >
+                        🗑️ Excluir
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
-      </form>
-
-      <hr style={{ margin: '30px 0' }} />
-
-      {/* --- LISTAGEM DINÂMICA COM MAP() --- */}
-      <h3>Cervejas Cadastradas</h3>
-      {cervejas.length === 0 ? (
-        <p>Nenhuma cerveja cadastrada ainda.</p>
-      ) : (
-        <table border="1" cellPadding="10" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-          <thead>
-            <tr style={{ backgroundColor: '#f2f2f2' }}>
-              <th>Nome</th>
-              <th>Preço</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cervejas.map((cerveja) => (
-              <tr key={cerveja.id}>
-                <td>{cerveja.nome}</td>
-                <td>R$ {cerveja.preco}</td>
-                <td>
-                  <button 
-                    onClick={() => handleIniciarEdicao(cerveja)}
-                    style={{ marginRight: '10px', cursor: 'pointer', backgroundColor: '#28a745', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '3px' }}
-                  >
-                    Editar
-                  </button>
-                  <button 
-                    onClick={() => handleExcluir(cerveja.id)}
-                    style={{ cursor: 'pointer', backgroundColor: '#dc3545', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '3px' }}
-                  >
-                    Excluir
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+      </section>
     </div>
   );
 }

@@ -2,9 +2,11 @@ import React, { useContext, useState } from 'react';
 import { AuthProvider, AuthContext } from './context/AuthContext';
 import Login from './pages/Login/Login';
 import Formulario from './pages/Formulario/Formulario';
-import Relatorio from './pages/Relatorio/Relatorio'; // Importando seu relatório com JOIN
-import Clientes from './pages/Clientes'; // Importar página de Clientes
-import Pedidos from './pages/Pedidos'; // Importar página de Pedidos
+import Relatorio from './pages/Relatorio/Relatorio';
+import Clientes from './pages/Clientes';
+import Pedidos from './pages/Pedidos';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 function ConteudoDoSistema() {
   const { logado, sair } = useContext(AuthContext);
@@ -18,109 +20,23 @@ function ConteudoDoSistema() {
   }
 
   return (
-    <div style={{ fontFamily: 'Arial, sans-serif', minHeight: '100vh', backgroundColor: '#f9f9f9' }}>
+    <div style={{ 
+      fontFamily: 'Arial, sans-serif', 
+      minHeight: '100vh', 
+      backgroundColor: '#f9f9f9',
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
       
-      {/* 🧭 BARRA DE NAVEGAÇÃO SUPERIOR */}
-      <header style={{ 
-        padding: '15px 30px', 
-        background: '#1a1a1a', 
-        color: '#fff', 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'center',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-        flexWrap: 'wrap',
-        gap: '15px'
-      }}>
-        <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>🍻 Mars Cervejaria - Admin</span>
-        
-        {/* Menu de Botões para alternar entre as telas */}
-        <nav style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
-          <button 
-            onClick={() => setTelaAtiva('formulario')} 
-            style={{ 
-              padding: '8px 16px', 
-              background: telaAtiva === 'formulario' ? '#ff9900' : '#333', 
-              color: telaAtiva === 'formulario' ? '#000' : '#fff', 
-              border: 'none',
-              borderRadius: '4px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              transition: 'all 0.2s'
-            }}
-          >
-            🍻 Cervejas
-          </button>
-
-          <button 
-            onClick={() => setTelaAtiva('clientes')} 
-            style={{ 
-              padding: '8px 16px', 
-              background: telaAtiva === 'clientes' ? '#ff9900' : '#333', 
-              color: telaAtiva === 'clientes' ? '#000' : '#fff', 
-              border: 'none',
-              borderRadius: '4px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              transition: 'all 0.2s'
-            }}
-          >
-            👥 Clientes
-          </button>
-
-          <button 
-            onClick={() => setTelaAtiva('pedidos')} 
-            style={{ 
-              padding: '8px 16px', 
-              background: telaAtiva === 'pedidos' ? '#ff9900' : '#333', 
-              color: telaAtiva === 'pedidos' ? '#000' : '#fff', 
-              border: 'none',
-              borderRadius: '4px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              transition: 'all 0.2s'
-            }}
-          >
-            🛒 Pedidos
-          </button>
-          
-          <button 
-            onClick={() => setTelaAtiva('relatorio')} 
-            style={{ 
-              padding: '8px 16px', 
-              background: telaAtiva === 'relatorio' ? '#ff9900' : '#333', 
-              color: telaAtiva === 'relatorio' ? '#000' : '#fff', 
-              border: 'none',
-              borderRadius: '4px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              transition: 'all 0.2s'
-            }}
-          >
-            📊 Relatório (JOIN)
-          </button>
-        </nav>
-
-        {/* Botão de Logout Funcional */}
-        <button 
-          onClick={sair} 
-          style={{ 
-            background: '#d9534f', 
-            color: 'white', 
-            border: 'none', 
-            padding: '8px 16px', 
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontWeight: 'bold',
-            transition: 'all 0.2s'
-          }}
-        >
-          Sair (Logout)
-        </button>
-      </header>
+      {/* NAVBAR COMPONENT */}
+      <Navbar 
+        telaAtiva={telaAtiva} 
+        setTelaAtiva={setTelaAtiva}
+        onLogout={sair}
+      />
       
       {/* 🖥️ RENDERIZAÇÃO CONDICIONAL DA TELA */}
-      <main style={{ padding: '30px' }}>
+      <main style={{ padding: '30px', flex: 1 }}>
         {telaAtiva === 'formulario' && (
           <div style={{ background: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
             <Formulario />
@@ -145,6 +61,9 @@ function ConteudoDoSistema() {
           </div>
         )}
       </main>
+
+      {/* FOOTER COMPONENT */}
+      <Footer />
     </div>
   );
 }

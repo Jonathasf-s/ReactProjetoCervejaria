@@ -1,0 +1,247 @@
+/* ===== LOGIN STYLES ===== */
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(211, 84, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(211, 84, 0, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Box do Login */
+.login-box {
+  background: white;
+  padding: 50px 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
+  z-index: 1;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header do Login */
+.login-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.login-header h1 {
+  color: #333;
+  font-size: 2rem;
+  margin: 0 0 10px 0;
+  background: linear-gradient(135deg, #d35400, #ff9900);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.login-header p {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Formulário */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.form-group input {
+  padding: 12px 14px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: #f9f9f9;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #d35400;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(211, 84, 0, 0.1);
+}
+
+.form-group input::placeholder {
+  color: #bbb;
+}
+
+/* Botão Entrar */
+.btn-entrar {
+  padding: 14px;
+  background: linear-gradient(135deg, #d35400, #ff9900);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-entrar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(211, 84, 0, 0.4);
+}
+
+.btn-entrar:active {
+  transform: translateY(0);
+}
+
+/* Footer do Login */
+.login-footer {
+  background: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  border-left: 4px solid #d35400;
+}
+
+.login-footer p {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.login-footer p:first-child {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.login-footer strong {
+  color: #d35400;
+  font-weight: 700;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .login-box {
+    padding: 40px 25px;
+    width: 95%;
+  }
+
+  .login-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .login-header p {
+    font-size: 0.9rem;
+  }
+
+  .form-group input {
+    padding: 11px 12px;
+    font-size: 13px;
+  }
+
+  .btn-entrar {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .login-footer {
+    padding: 15px;
+  }
+
+  .login-footer p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 20px;
+  }
+
+  .login-box {
+    padding: 30px 20px;
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .login-header h1 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+
+  .login-header p {
+    font-size: 0.85rem;
+  }
+
+  .login-form {
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+
+  .form-group input {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .btn-entrar {
+    padding: 11px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+
+  .login-footer {
+    padding: 12px;
+  }
+
+  .login-footer p {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+}

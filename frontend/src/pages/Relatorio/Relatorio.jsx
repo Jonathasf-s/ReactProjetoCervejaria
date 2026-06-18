@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import './Relatorio.css';
 
 function Relatorio() {
   const [relatorioDados, setRelatorioDados] = useState([]);
   const [totalVendas, setTotalVendas] = useState(0);
 
-  // ✅ Função que carrega e processa os dados
+  // Função que carrega e processa os dados
   const carregarRelatorio = () => {
     try {
       const pedidos = JSON.parse(localStorage.getItem('mars_pedidos')) || [];
@@ -17,7 +18,7 @@ function Relatorio() {
         return;
       }
 
-      // ✅ JOIN corrigido - compara IDs diretamente (sem String())
+      // JOIN corrigido - compara IDs diretamente (sem String())
       const dadosCruzados = pedidos.map((pedido) => {
         // Procura o cliente usando o ID correto
         const clienteEncontrado = clientes.find(c => c.id === pedido.clienteId);
@@ -51,7 +52,7 @@ function Relatorio() {
     }
   };
 
-  // ✅ Carrega ao montar e escuta mudanças no localStorage
+  // Carrega ao montar e escuta mudanças no localStorage
   useEffect(() => {
     carregarRelatorio();
 
@@ -65,47 +66,59 @@ function Relatorio() {
   }, []);
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>📊 Relatório de Vendas — Mars Cervejaria</h2>
-      <p></p>
+    <div className="container-relatorio">
+      <h1>📊 Relatório de Vendas</h1>
 
-      {relatorioDados.length === 0 ? (
-        <p>Nenhum pedido realizado até o momento.</p>
-      ) : (
-        <>
-          <table border="1" cellPadding="10" style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
-            <thead>
-              <tr style={{ backgroundColor: '#222', color: '#fff' }}>
-                <th>ID Pedido</th>
-                <th>Cliente</th>
-                <th>Cerveja</th>
-                <th>Quantidade</th>
-                <th>Valor Unit. (R$)</th>
-                <th>Total da Venda (R$)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {relatorioDados.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.nomeCliente}</td>
-                  <td>{item.nomeCerveja}</td>
-                  <td>{item.quantidade}x</td>
-                  <td>R$ {item.valorUnitario}</td>
-                  <td style={{ fontWeight: 'bold' }}>R$ {item.valorTotal}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <section className="relatorio-section">
+        {relatorioDados.length === 0 ? (
+          <p className="sem-dados">Nenhum pedido realizado até o momento.</p>
+        ) : (
+          <>
+            <div className="table-wrapper">
+              <table className="tabela-relatorio">
+                <thead>
+                  <tr>
+                    <th>ID Pedido</th>
+                    <th>Cliente</th>
+                    <th>Cerveja</th>
+                    <th>Quantidade</th>
+                    <th>Valor Unit. (R$)</th>
+                    <th>Total (R$)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {relatorioDados.map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.id}</td>
+                      <td>{item.nomeCliente}</td>
+                      <td>{item.nomeCerveja}</td>
+                      <td>{item.quantidade}x</td>
+                      <td>R$ {item.valorUnitario}</td>
+                      <td className="valor-total">R$ {item.valorTotal}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-          {/* ✅ Total de vendas */}
-          <div style={{ marginTop: '20px', padding: '15px', backgroundColor: '#e8f5e9', borderRadius: '4px', border: '2px solid #4caf50' }}>
-            <h3 style={{ margin: 0, color: '#2e7d32' }}>
-              💰 Total de Vendas: R$ {totalVendas.toFixed(2)}
-            </h3>
-          </div>
-        </>
-      )}
+            {/* Resumo Total */}
+            <div className="resumo-relatorio">
+              <div className="resumo-item destaque">
+                <span className="label">💰 Total de Vendas:</span>
+                <span className="valor">R$ {totalVendas.toFixed(2)}</span>
+              </div>
+              <div className="resumo-item">
+                <span className="label">📦 Pedidos Realizados:</span>
+                <span className="valor">{relatorioDados.length}</span>
+              </div>
+              <div className="resumo-item">
+                <span className="label">🍻 Quantidade Total:</span>
+                <span className="valor">{relatorioDados.reduce((acc, item) => acc + item.quantidade, 0)}</span>
+              </div>
+            </div>
+          </>
+        )}
+      </section>
     </div>
   );
 }
