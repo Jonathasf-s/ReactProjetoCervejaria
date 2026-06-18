@@ -2,6 +2,7 @@ import React from 'react';
 import './Footer.css';
 import instaSvg from '/src/assets/icons/INSTA.svg';
 import whatsappSvg from '/src/assets/icons/WHATSAPP.svg';
+import logometadeSvg from '/src/assets/logos/metade.svg';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -43,7 +44,9 @@ export default function Footer() {
         {/* Seção de Copyright */}
         <div className="footer-section">
           <p className="copyright">
-            &copy; {currentYear} <strong>Mars Cervejaria</strong>. Todos os direitos reservados.
+            &copy; {currentYear} <strong>Mars Cervejaria</strong>
+            <img src={logometadeSvg} alt="Mars Cervejaria Logo pela Metade" className="footer-logo" />
+            . Todos os direitos reservados.
           </p>
           <p className="footer-subtitle">
             Sistema de Gerenciamento Administrativo v1.0
