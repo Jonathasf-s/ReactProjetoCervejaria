@@ -59,11 +59,17 @@
 .form-group input,
 .form-group select {
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #333;
   border-radius: 4px;
   font-size: 14px;
   font-family: inherit;
   transition: border-color 0.2s;
+  color: #000000;
+}
+
+.form-group input::placeholder,
+.form-group select::placeholder {
+  color: #888;
 }
 
 .form-group input:focus,

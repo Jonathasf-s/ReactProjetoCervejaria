@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import './Login.css';
+import wallpaper from '../../assets/wallpapers/por-do-sol-na-praia-1.jpg';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -9,7 +10,7 @@ function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    
+
     const sucesso = entrar(email, senha);
     if (sucesso) {
       alert("Login realizado com sucesso!");
@@ -20,7 +21,10 @@ function Login() {
     <div className="login-container">
       <div className="login-box">
         <div className="login-header">
-          <h1>🍻 Mars Cervejaria</h1>
+          <h1>
+            <span className="emoji" aria-hidden="true">🍻</span>
+            <span className="title">Mars Cervejaria</span>
+          </h1>
           <p>Sistema Administrativo</p>
         </div>
 
@@ -61,7 +65,10 @@ function Login() {
         </div>
       </div>
 
-      <div className="login-background"></div>
+      <div
+        className="login-background"
+        style={{ backgroundImage: `url(${wallpaper})` }}
+      ></div>
     </div>
   );
 }

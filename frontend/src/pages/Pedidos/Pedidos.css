@@ -62,13 +62,14 @@
   font-size: 14px;
   font-family: inherit;
   transition: border-color 0.2s;
+  background-color: #fff;
 }
 
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
   border-color: #d35400;
-  box-shadow: 0 0 0 3px rgba(211, 84, 0, 0.1);
+  box-shadow: 0 0 0 3px rgb(255, 255, 255);
 }
 
 /* Grupo de Botões */
