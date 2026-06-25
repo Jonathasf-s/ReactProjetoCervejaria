@@ -1,0 +1,187 @@
+/* ===== CADASTRO CLIENTES ===== */
+.cadastro-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 50%, #1a0a00 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+}
+
+.cadastro-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.cadastro-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.cadastro-header h1 {
+  font-size: 1.6rem;
+  color: #b85c00;
+  margin-bottom: 6px;
+}
+
+.cadastro-header h2 {
+  font-size: 1.3rem;
+  color: #1a0a00;
+  margin-bottom: 6px;
+}
+
+.cadastro-header p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Erro */
+.cadastro-erro {
+  background: #fdecea;
+  color: #c0392b;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Form */
+.cadastro-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input {
+  padding: 10px 12px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: #b85c00;
+}
+
+.btn-cadastrar {
+  margin-top: 8px;
+  padding: 14px;
+  background: #b85c00;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  letter-spacing: 0.5px;
+}
+
+.btn-cadastrar:hover {
+  background: #9a4d00;
+  transform: translateY(-1px);
+}
+
+/* Footer */
+.cadastro-footer {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #b85c00;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.link-btn:hover {
+  color: #9a4d00;
+}
+
+/* Sucesso */
+.sucesso-box {
+  text-align: center;
+  padding: 60px 40px;
+}
+
+.sucesso-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
+.sucesso-box h2 {
+  font-size: 1.6rem;
+  color: #1a0a00;
+  margin-bottom: 12px;
+}
+
+.sucesso-box p {
+  color: #555;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.btn-ir-login {
+  margin-top: 24px;
+  padding: 12px 32px;
+  background: #b85c00;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-ir-login:hover {
+  background: #9a4d00;
+}
+
+/* Responsivo */
+@media (max-width: 560px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .cadastro-box {
+    padding: 28px 20px;
+  }
+}

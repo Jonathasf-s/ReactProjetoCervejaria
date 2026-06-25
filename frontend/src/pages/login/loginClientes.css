@@ -1,0 +1,145 @@
+/* ===== LOGIN CLIENTES ===== */
+.login-clientes-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 50%, #1a0a00 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-clientes-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.login-clientes-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.login-clientes-header h1 {
+  font-size: 1.6rem;
+  color: #b85c00;
+  margin-bottom: 8px;
+}
+
+.login-clientes-header h2 {
+  font-size: 1.2rem;
+  color: #1a0a00;
+  margin-bottom: 6px;
+}
+
+.login-clientes-header p {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* Erro */
+.login-clientes-erro {
+  background: #fdecea;
+  color: #c0392b;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+/* Form */
+.login-clientes-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input {
+  padding: 12px 14px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: #b85c00;
+}
+
+.btn-entrar-cliente {
+  padding: 14px;
+  background: #b85c00;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 4px;
+}
+
+.btn-entrar-cliente:hover {
+  background: #9a4d00;
+  transform: translateY(-1px);
+}
+
+/* Footer */
+.login-clientes-footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.separador {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 14px 0;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #b85c00;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.link-btn:hover {
+  color: #9a4d00;
+}
+
+.link-btn-secundario {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.link-btn-secundario:hover {
+  color: #555;
+}

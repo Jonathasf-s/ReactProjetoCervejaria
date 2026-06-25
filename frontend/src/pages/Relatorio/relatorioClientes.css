@@ -1,0 +1,288 @@
+/* ===== RESUMO PEDIDO ===== */
+.resumo-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 100%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.resumo-box {
+  background: #fff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 620px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+}
+
+/* Cabeçalho */
+.resumo-header {
+  background: linear-gradient(135deg, #1a0a00, #3d1a00);
+  color: white;
+  padding: 36px 32px;
+  text-align: center;
+}
+
+.resumo-check {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.resumo-header h1 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  color: #f5a623;
+}
+
+.resumo-header p {
+  color: #c8a882;
+  font-size: 0.95rem;
+}
+
+/* Meta */
+.resumo-meta {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 32px;
+  background: #faf7f4;
+  border-bottom: 1px solid #f0e8de;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.meta-label {
+  font-size: 0.75rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.meta-valor {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a0a00;
+}
+
+.meta-valor.codigo {
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: #b85c00;
+}
+
+/* Itens */
+.resumo-itens {
+  padding: 28px 32px;
+  border-bottom: 1px solid #f0e8de;
+}
+
+.resumo-itens h2 {
+  font-size: 1.1rem;
+  color: #1a0a00;
+  margin-bottom: 16px;
+}
+
+.resumo-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.resumo-tabela thead tr {
+  background: #f0e8de;
+}
+
+.resumo-tabela th {
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 0.8rem;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.resumo-tabela td {
+  padding: 12px;
+  color: #333;
+  border-bottom: 1px solid #f5f0ea;
+}
+
+.item-emoji {
+  margin-right: 8px;
+}
+
+.subtotal {
+  font-weight: 700;
+  color: #1a0a00;
+}
+
+.resumo-total-linha {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid #f0e8de;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a0a00;
+}
+
+.resumo-total-valor {
+  font-size: 1.4rem;
+  color: #b85c00;
+}
+
+/* Pagamento */
+.resumo-pagamento {
+  padding: 28px 32px;
+  background: #faf7f4;
+  border-bottom: 1px solid #f0e8de;
+  text-align: center;
+}
+
+.resumo-pagamento h2 {
+  font-size: 1.1rem;
+  color: #1a0a00;
+  margin-bottom: 8px;
+}
+
+.pagamento-instrucao {
+  color: #666;
+  font-size: 0.88rem;
+  margin-bottom: 20px;
+}
+
+/* Código de barras */
+.barcode-container {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 16px;
+}
+
+.barcode-svg {
+  width: 260px;
+  height: 90px;
+  display: block;
+}
+
+/* Código para copiar */
+.codigo-copia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.codigo-texto {
+  font-family: monospace;
+  font-size: 0.85rem;
+  background: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #ddd;
+  color: #333;
+  letter-spacing: 1px;
+}
+
+.btn-copiar {
+  padding: 8px 16px;
+  background: #b85c00;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-copiar:hover {
+  background: #9a4d00;
+}
+
+.pagamento-aviso {
+  font-size: 0.78rem;
+  color: #aaa;
+  margin-top: 4px;
+}
+
+/* Ações */
+.resumo-acoes {
+  padding: 24px 32px;
+  display: flex;
+  gap: 12px;
+}
+
+.btn-novo-pedido {
+  flex: 1;
+  padding: 13px;
+  background: #b85c00;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-novo-pedido:hover {
+  background: #9a4d00;
+}
+
+.btn-voltar-vitrine {
+  flex: 1;
+  padding: 13px;
+  background: transparent;
+  color: #888;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-voltar-vitrine:hover {
+  background: #f5f0ea;
+  color: #555;
+  border-color: #bbb;
+}
+
+/* Responsivo */
+@media (max-width: 500px) {
+  .resumo-header,
+  .resumo-itens,
+  .resumo-pagamento,
+  .resumo-acoes,
+  .resumo-meta {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .resumo-acoes {
+    flex-direction: column;
+  }
+
+  .barcode-svg {
+    width: 200px;
+  }
+
+  .resumo-meta {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}

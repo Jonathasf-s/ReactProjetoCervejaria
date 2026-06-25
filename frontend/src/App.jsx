@@ -1,74 +1,127 @@
 import React, { useContext, useState } from 'react';
 import { AuthProvider, AuthContext } from './context/AuthContext';
-import Login from './pages/Login/Login';
+
+// Páginas Admin
+import Login from './pages/login/login';
 import Formulario from './pages/Formulario/Formulario';
 import Relatorio from './pages/Relatorio/Relatorio';
-import Clientes from './pages/Clientes';
-import Pedidos from './pages/Pedidos';
+import Clientes from './pages/Clientes/index';
+import Pedidos from './pages/Pedidos/index';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
-function ConteudoDoSistema() {
-  const { logado, sair } = useContext(AuthContext);
-  
-  // Estado que controla qual tela está ativa na tela do usuário
-  const [telaAtiva, setTelaAtiva] = useState('formulario');
+// Páginas novas (clientes)
+import Vitrine from './pages/Vitrine/vitrine';
+import LoginClientes from './pages/login/loginClientes';
+import CadastroClientes from './pages/Clientes/cadastroClientes';
+import PedidosClientes from './pages/Pedidos/pedidosClientes';
+import RelatorioClientes from './pages/Relatorio/relatorioClientes';
 
-  // 🔒 BLOQUEIO DAS TELAS: Se não estiver logado, obriga a ficar na tela de Login
-  if (!logado) {
-    return <Login />;
+function ConteudoDoSistema() {
+  const { logado, usuarioAtual, sair } = useContext(AuthContext);
+
+  const [tela, setTela] = useState('vitrine');
+  const [pedidoParaResumo, setPedidoParaResumo] = useState(null);
+
+  // ── ADMIN ──────────────────────────────────────────────
+  if (logado && usuarioAtual?.tipo === 'admin') {
+    const telaAdmin = ['formulario', 'clientes', 'pedidos', 'relatorio'].includes(tela)
+      ? tela : 'formulario';
+
+    return (
+      <div style={{ fontFamily: 'Arial, sans-serif', minHeight: '100vh', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column' }}>
+        <Navbar
+          telaAtiva={telaAdmin}
+          setTelaAtiva={setTela}
+          onLogout={() => { sair(); setTela('vitrine'); }}
+        />
+        <main style={{ padding: '30px', flex: 1 }}>
+          <div style={{ background: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
+            {telaAdmin === 'formulario' && <Formulario />}
+            {telaAdmin === 'clientes'   && <Clientes />}
+            {telaAdmin === 'pedidos'    && <Pedidos />}
+            {telaAdmin === 'relatorio'  && <Relatorio />}
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
   }
 
-  return (
-    <div style={{ 
-      fontFamily: 'Arial, sans-serif', 
-      minHeight: '100vh', 
-      backgroundColor: '#f9f9f9',
-      display: 'flex',
-      flexDirection: 'column'
-    }}>
-      
-      {/* NAVBAR COMPONENT */}
-      <Navbar 
-        telaAtiva={telaAtiva} 
-        setTelaAtiva={setTelaAtiva}
-        onLogout={sair}
+  // ── LOGIN ADMIN ─────────────────────────────────────────
+  if (tela === 'loginAdmin') {
+    return <Login onVoltarVitrine={() => setTela('vitrine')} />;
+  }
+
+  // ── CLIENTE LOGADO ──────────────────────────────────────
+  if (logado && usuarioAtual?.tipo === 'cliente') {
+
+    if (tela === 'relatorioClientes' && pedidoParaResumo) {
+      return (
+        <RelatorioClientes
+          pedido={pedidoParaResumo}
+          onVoltar={() => {
+            setPedidoParaResumo(null);
+            setTela('pedidosClientes');
+          }}
+          onVoltarVitrine={() => {
+            setPedidoParaResumo(null);
+            setTela('vitrine');
+          }}
+        />
+      );
+    }
+
+    if (tela === 'pedidosClientes') {
+      return (
+        <PedidosClientes
+          onConfirmarPedido={(pedido) => {
+            setPedidoParaResumo(pedido);
+            setTela('relatorioClientes');
+          }}
+          onVoltarVitrine={() => setTela('vitrine')}
+        />
+      );
+    }
+
+    // tela === 'vitrine' ou qualquer outro valor → mostra vitrine logada
+    return (
+      <Vitrine
+        onIrParaLogin={() => setTela('loginClientes')}
+        onIrParaPedido={() => setTela('pedidosClientes')}
+        onIrParaAdmin={() => setTela('loginAdmin')}
       />
-      
-      {/* 🖥️ RENDERIZAÇÃO CONDICIONAL DA TELA */}
-      <main style={{ padding: '30px', flex: 1 }}>
-        {telaAtiva === 'formulario' && (
-          <div style={{ background: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
-            <Formulario />
-          </div>
-        )}
+    );
+  }
 
-        {telaAtiva === 'clientes' && (
-          <div style={{ background: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
-            <Clientes />
-          </div>
-        )}
+  // ── PÚBLICO NÃO LOGADO ──────────────────────────────────
+  if (tela === 'cadastroClientes') {
+    return (
+      <CadastroClientes
+        onIrParaLogin={() => setTela('loginClientes')}
+      />
+    );
+  }
 
-        {telaAtiva === 'pedidos' && (
-          <div style={{ background: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
-            <Pedidos />
-          </div>
-        )}
-        
-        {telaAtiva === 'relatorio' && (
-          <div style={{ background: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
-            <Relatorio />
-          </div>
-        )}
-      </main>
+  if (tela === 'loginClientes') {
+    return (
+      <LoginClientes
+        onIrParaCadastro={() => setTela('cadastroClientes')}
+        onIrParaVitrine={() => setTela('vitrine')}
+      />
+    );
+  }
 
-      {/* FOOTER COMPONENT */}
-      <Footer />
-    </div>
+  // Vitrine pública (padrão / fallback)
+  return (
+    <Vitrine
+      onIrParaLogin={() => setTela('loginClientes')}
+      onIrParaPedido={() => setTela('loginClientes')}
+      onIrParaAdmin={() => setTela('loginAdmin')}
+    />
   );
 }
 
-// O App principal envolve todo o sistema com a nossa central de autenticação
 function App() {
   return (
     <AuthProvider>

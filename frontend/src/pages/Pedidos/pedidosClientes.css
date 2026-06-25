@@ -1,0 +1,268 @@
+/* ===== PEDIDO CLIENTES ===== */
+.pedido-clientes-container {
+  min-height: 100vh;
+  background: #faf7f4;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Header */
+.pedido-header {
+  background: #1a0a00;
+  padding: 0 24px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.pedido-header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pedido-header h1 {
+  color: #f5a623;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.btn-voltar {
+  background: transparent;
+  border: 1px solid #555;
+  color: #ccc;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.btn-voltar:hover {
+  background: #333;
+  color: #fff;
+}
+
+.pedido-usuario {
+  color: #f5c87a;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Layout */
+.pedido-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 32px;
+  align-items: start;
+}
+
+/* Produtos */
+.pedido-produtos h2 {
+  font-size: 1.4rem;
+  color: #1a0a00;
+  margin-bottom: 24px;
+}
+
+.pedido-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pedido-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border: 2px solid transparent;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.pedido-card.selecionado {
+  border-color: #b85c00;
+  box-shadow: 0 4px 16px rgba(184, 92, 0, 0.15);
+}
+
+.pedido-card-emoji {
+  font-size: 2.4rem;
+  min-width: 50px;
+  text-align: center;
+}
+
+.pedido-card-info {
+  flex: 1;
+}
+
+.pedido-card-info h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a0a00;
+  margin-bottom: 4px;
+}
+
+.pedido-card-desc {
+  font-size: 0.82rem;
+  color: #888;
+  margin-bottom: 6px;
+}
+
+.pedido-card-preco {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #b85c00;
+}
+
+/* Controles de quantidade */
+.pedido-card-controles {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-qtd {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+  line-height: 1;
+}
+
+.btn-qtd.mais {
+  background: #b85c00;
+  color: white;
+}
+
+.btn-qtd.mais:hover {
+  background: #9a4d00;
+}
+
+.btn-qtd.menos {
+  background: #eee;
+  color: #333;
+}
+
+.btn-qtd.menos:hover:not(:disabled) {
+  background: #ddd;
+}
+
+.btn-qtd:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.qtd-valor {
+  font-size: 1.1rem;
+  font-weight: 700;
+  min-width: 24px;
+  text-align: center;
+  color: #1a0a00;
+}
+
+/* Carrinho */
+.pedido-carrinho {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 80px;
+}
+
+.pedido-carrinho h2 {
+  font-size: 1.2rem;
+  color: #1a0a00;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f0e8de;
+}
+
+.carrinho-vazio {
+  color: #aaa;
+  font-size: 0.88rem;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.carrinho-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.carrinho-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.carrinho-item-nome {
+  color: #444;
+}
+
+.carrinho-item-valor {
+  font-weight: 700;
+  color: #1a0a00;
+}
+
+.carrinho-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-top: 2px solid #f0e8de;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #1a0a00;
+  margin-bottom: 16px;
+}
+
+.btn-confirmar {
+  width: 100%;
+  padding: 14px;
+  background: #b85c00;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn-confirmar:hover:not(:disabled) {
+  background: #9a4d00;
+  transform: translateY(-1px);
+}
+
+.btn-confirmar:disabled {
+  background: #ccc;
+  cursor: default;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .pedido-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .pedido-carrinho {
+    position: static;
+  }
+}
